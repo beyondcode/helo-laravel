@@ -1,0 +1,50 @@
+{
+    "name": "beyondcode/helo-laravel",
+    "description": "HELO Laravel debug helper",
+    "keywords": [
+        "beyondcode",
+        "HELO"
+    ],
+    "homepage": "https://github.com/beyondcode/helo-laravel",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marcel Pociot",
+            "email": "marcel@beyondco.de",
+            "homepage": "https://beyondcode.de",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.3",
+        "illuminate/mail": "^6.0|^7.0"
+    },
+    "require-dev": {
+        "larapack/dd": "^1.0",
+        "phpunit/phpunit": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "BeyondCode\\HeloLaravel\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "BeyondCode\\HeloLaravel\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "BeyondCode\\HeloLaravel\\HeloLaravelServiceProvider"
+            ]
+        }
+    }
+}
