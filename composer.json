@@ -17,10 +17,12 @@
     ],
     "require": {
         "php": "^7.3",
+        "illuminate/view": "^6.0|^7.0",
+        "illuminate/console": "^6.0|^7.0",
         "illuminate/mail": "^6.0|^7.0"
     },
     "require-dev": {
-        "larapack/dd": "^1.0",
+        "orchestra/testbench": "^5.1",
         "phpunit/phpunit": "^8.0"
     },
     "autoload": {
