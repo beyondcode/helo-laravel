@@ -1,7 +1,7 @@
 # HELO Laravel
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/beyondcode/helo-laravel.svg?style=flat-square)](https://packagist.org/packages/beyondcode/helo-laravel)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/beyondcode/helo-laravel/run-tests?label=tests)
+[![Build Status](https://img.shields.io/travis/beyondcode/laravel-mailbox/master.svg?style=flat-square)](https://travis-ci.org/beyondcode/laravel-mailbox)
 [![Quality Score](https://img.shields.io/scrutinizer/g/beyondcode/helo-laravel.svg?style=flat-square)](https://scrutinizer-ci.com/g/beyondcode/helo-laravel)
 [![Total Downloads](https://img.shields.io/packagist/dt/beyondcode/helo-laravel.svg?style=flat-square)](https://packagist.org/packages/beyondcode/helo-laravel)
 
