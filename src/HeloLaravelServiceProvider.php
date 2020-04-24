@@ -45,7 +45,6 @@ class HeloLaravelServiceProvider extends ServiceProvider
             ], 'config');
         }
 
-        
         $this->mergeConfigFrom(__DIR__.'/../config/helo.php', 'helo');
 
         $this->app->singleton(Mailer::class, function ($app) {
@@ -93,7 +92,7 @@ class HeloLaravelServiceProvider extends ServiceProvider
         // Once we have create the mailer instance, we will set a container instance
         // on the mailer. This allows us to resolve mailer classes via containers
         // for maximum testability on said classes instead of passing Closures.
-        $mailer = new Mailer(
+        $mailer = new Laravel7Mailer(
             'smtp', $app['view'], $swiftMailer, $app['events']
         );
 
