@@ -3,6 +3,8 @@
 namespace BeyondCode\HeloLaravel;
 
 use Illuminate\Contracts\Mail\Mailer as MailerContract;
+use Illuminate\Mail\Mailer as LaravelMailer;
+use Illuminate\Mail\MailManager;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
@@ -83,11 +85,25 @@ class HeloLaravelServiceProvider extends ServiceProvider
 
     protected function createLaravel7Mailer($app)
     {
-        $defaultDriver = $app['mail.manager']->getDefaultDriver();
-        $config = $this->getConfig($defaultDriver);
+        $mailManager = $app['mail.manager'];
 
-        // Laravel 7 no longer bindes the swift.mailer:
-        $swiftMailer = new Swift_Mailer($app['mail.manager']->createTransport($config));
+        $swiftMailer = null;
+
+        // Laravel 7 no longer binds the Swift_Mailer so we try and get it from a mailer
+        if ($mailManager instanceof MailManager) {
+            $laravelMailer = $mailManager->mailer();
+
+            if ($laravelMailer instanceof LaravelMailer) {
+                $swiftMailer = $laravelMailer->getSwiftMailer();
+            }
+        }
+
+        $config = $this->getConfig($mailManager->getDefaultDriver());
+
+        // If we could not extra a Swift_Mailer instance from the driver we do it our self
+        if ($swiftMailer === null) {
+            $swiftMailer = new Swift_Mailer($app['mail.manager']->createTransport($config));
+        }
 
         // Once we have create the mailer instance, we will set a container instance
         // on the mailer. This allows us to resolve mailer classes via containers
