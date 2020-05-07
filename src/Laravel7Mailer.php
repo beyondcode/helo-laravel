@@ -13,4 +13,13 @@ class Laravel7Mailer extends Mailer implements MailerContract, MailFactory
 
         return $this;
     }
+    
+     /**
+     * Void function, bug fix for BeyondCode Hello
+     * Github issue: https://github.com/beyondcode/helo-laravel/issues/15
+     */
+    public static function extend()
+    {
+
+    }
 }
