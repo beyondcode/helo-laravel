@@ -30,6 +30,16 @@ class HeloTest extends TestCase
     }
 
     /** @test */
+    public function test_plain_text_mails_work_correctly()
+    {
+        Mail::fake();
+
+        Mail::to('test@usehelo.com')->send(new TestMail(true));
+
+        Mail::assertSent(TestMail::class);
+    }
+
+    /** @test */
     public function test_the_correct_mailer_is_binded()
     {
         $mailer = app(Mailer::class);
