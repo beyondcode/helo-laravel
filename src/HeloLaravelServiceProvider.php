@@ -26,6 +26,10 @@ class HeloLaravelServiceProvider extends ServiceProvider
         Mail::swap($instance);
 
         app()->instance(MailerContract::class, $instance);
+        
+        if ($this->app->runningInConsole()) {
+            View::addNamespace('helo', __DIR__ . '/../resources/views');
+        }
     }
 
     /**
@@ -37,9 +41,7 @@ class HeloLaravelServiceProvider extends ServiceProvider
             $this->commands([
                 TestMailCommand::class,
             ]);
-
-            View::addNamespace('helo', __DIR__ . '/../resources/views');
-
+            
             $this->publishes([
                 __DIR__.'/../config/helo.php' => base_path('config/helo.php'),
             ], 'config');
