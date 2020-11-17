@@ -17,7 +17,7 @@ class HeloLaravelServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (!$this->app['config']['helo.is_enabled']) {
+        if ($this->app->runningUnitTests() || !$this->app['config']['helo.is_enabled']) {
             return;
         }
 
