@@ -43,13 +43,13 @@ Please refer to the HELO documentation in order to setup your application to sen
 
 Once HELO accepts emails from your application, you can try if the package works, using the built-in test command:
 
-```
+```sh
 php artisan helo:test
 ```
 
 A test message should appear in your HELO UI containing additional debug information:
 
-![](./docs/helo.png)
+![HELO](./docs/helo.png)
 
 ### Changelog
 
