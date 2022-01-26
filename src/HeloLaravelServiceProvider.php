@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
+use Symfony\Component\Mailer\Mailer as SymfonyMailer;
 use Swift_Mailer;
 
 class HeloLaravelServiceProvider extends ServiceProvider
@@ -26,7 +27,7 @@ class HeloLaravelServiceProvider extends ServiceProvider
         Mail::swap($instance);
 
         app()->instance(MailerContract::class, $instance);
-        
+
         if ($this->app->runningInConsole()) {
             View::addNamespace('helo', __DIR__ . '/../resources/views');
         }
@@ -41,7 +42,7 @@ class HeloLaravelServiceProvider extends ServiceProvider
             $this->commands([
                 TestMailCommand::class,
             ]);
-            
+
             $this->publishes([
                 __DIR__.'/../config/helo.php' => base_path('config/helo.php'),
             ], 'config');
@@ -50,11 +51,15 @@ class HeloLaravelServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/helo.php', 'helo');
 
         $this->app->singleton(Mailer::class, function ($app) {
-            if (version_compare($app->version(), '7.0.0', '<')) {
+            $version = (int) Str::of($app->version())->explode('.')->first();
+
+            if ($version < 7) {
                 return $this->createLaravel6Mailer($app);
+            } elseif ($version < 9) {
+                return $this->createLaravel7Mailer($app);
             }
 
-            return $this->createLaravel7Mailer($app);
+            return $this->createLaravel9Mailer($app);
         });
     }
 
@@ -96,6 +101,35 @@ class HeloLaravelServiceProvider extends ServiceProvider
         // for maximum testability on said classes instead of passing Closures.
         $mailer = new Laravel7Mailer(
             'smtp', $app['view'], $swiftMailer, $app['events']
+        );
+
+        if ($app->bound('queue')) {
+            $mailer->setQueue($app['queue']);
+        }
+
+        // Next we will set all of the global addresses on this mailer, which allows
+        // for easy unification of all "from" addresses as well as easy debugging
+        // of sent messages since they get be sent into a single email address.
+        foreach (['from', 'reply_to', 'to', 'return_path'] as $type) {
+            $this->setGlobalAddress($mailer, $config, $type);
+        }
+
+        return $mailer;
+    }
+
+    protected function createLaravel9Mailer($app)
+    {
+        $defaultDriver = $app['mail.manager']->getDefaultDriver();
+        $config = $this->getConfig($defaultDriver);
+
+        // We get Symfony Transport from Laravel 9 mailer
+        $symfonyTransport = $app['mail.manager']->getSymfonyTransport();
+
+        // Once we have create the mailer instance, we will set a container instance
+        // on the mailer. This allows us to resolve mailer classes via containers
+        // for maximum testability on said classes instead of passing Closures.
+        $mailer = new Laravel7Mailer(
+            'smtp', $app['view'], $symfonyTransport, $app['events']
         );
 
         if ($app->bound('queue')) {
