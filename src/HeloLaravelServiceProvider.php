@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
-use Symfony\Component\Mailer\Mailer as SymfonyMailer;
 use Swift_Mailer;
 
 class HeloLaravelServiceProvider extends ServiceProvider
@@ -55,7 +54,8 @@ class HeloLaravelServiceProvider extends ServiceProvider
 
             if ($version < 7) {
                 return $this->createLaravel6Mailer($app);
-            } elseif ($version < 9) {
+            }
+            if ($version < 9) {
                 return $this->createLaravel7Mailer($app);
             }
 
