@@ -26,7 +26,9 @@ class Mailer extends LaravelMailer implements MailerContract
 
     protected function applyDebugHeaders(Mailable $mailable)
     {
-        $mailable->withSwiftMessage(function (\Swift_Message $swiftMessage) use ($mailable) {
+        $methodName = method_exists($mailable, 'withSymfonyMessage') ? 'withSymfonyMessage' : 'withSwiftMessage';
+        
+        $mailable->$methodName(function ($message) use ($mailable) {
             $viewFile = $view = $viewContent = $viewData = null;
 
             $viewFile = $this->getMailableViewFile($mailable);
@@ -42,7 +44,7 @@ class Mailer extends LaravelMailer implements MailerContract
              * We need to base64 encode the data, as the SMTP header mime encoding could add unwanted
              * CLRF line breaks.
              */
-            $headers = $swiftMessage->getHeaders();
+            $headers = $message->getHeaders();
             $headers->addTextHeader('X-HELO-View', base64_encode($viewContent));
             $headers->addTextHeader('X-HELO-View-File', base64_encode($viewFile));
             $headers->addTextHeader('X-HELO-View-Data', base64_encode($viewData));
