@@ -13,4 +13,9 @@ class Laravel7Mailer extends Mailer implements MailerContract, MailFactory
 
         return $this;
     }
+    
+    public function extend()
+    {
+        //
+    }
 }
