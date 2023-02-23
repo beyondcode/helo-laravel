@@ -27,7 +27,7 @@ class Mailer extends LaravelMailer implements MailerContract
     protected function applyDebugHeaders(Mailable $mailable)
     {
         $methodName = method_exists($mailable, 'withSymfonyMessage') ? 'withSymfonyMessage' : 'withSwiftMessage';
-        
+
         $mailable->$methodName(function ($message) use ($mailable) {
             $viewFile = $view = $viewContent = $viewData = null;
 
