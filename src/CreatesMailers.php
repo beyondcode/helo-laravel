@@ -4,6 +4,7 @@ namespace BeyondCode\HeloLaravel;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Swift_Mailer;
 
 trait CreatesMailers
 {
