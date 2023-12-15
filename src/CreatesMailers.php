@@ -68,7 +68,11 @@ trait CreatesMailers
         $config = $this->getConfig($defaultDriver);
 
         // We get Symfony Transport from Laravel 9 mailer
-        $symfonyTransport = $app['mail.manager']->getSymfonyTransport();
+        if (version_compare(app()->version(), '10.0.0', '<')) {
+            $symfonyTransport = $app['mail.manager']->getSymfonyTransport();
+        } else {
+            $symfonyTransport = $app['mailer']->getSymfonyTransport();
+        }
 
         // Once we have create the mailer instance, we will set a container instance
         // on the mailer. This allows us to resolve mailer classes via containers
