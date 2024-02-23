@@ -7,6 +7,9 @@ use Illuminate\Contracts\Mail\Mailer as MailerContract;
 
 class Laravel7Mailer extends Mailer implements MailerContract, MailFactory
 {
+
+    public $currentMailer = null;
+
     public function mailer($name = null)
     {
         $this->currentMailer = $name;
