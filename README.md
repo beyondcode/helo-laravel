@@ -1,8 +1,6 @@
 # HELO Laravel
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/beyondcode/helo-laravel.svg?style=flat-square)](https://packagist.org/packages/beyondcode/helo-laravel)
-[![Build Status](https://img.shields.io/travis/beyondcode/helo-laravel/master.svg?style=flat-square)](https://travis-ci.org/beyondcode/helo-laravel)
-[![Quality Score](https://img.shields.io/scrutinizer/g/beyondcode/helo-laravel.svg?style=flat-square)](https://scrutinizer-ci.com/g/beyondcode/helo-laravel)
 [![Total Downloads](https://img.shields.io/packagist/dt/beyondcode/helo-laravel.svg?style=flat-square)](https://packagist.org/packages/beyondcode/helo-laravel)
 
 The helper package to add additional debug information from Laravel to your [HELO](https://usehelo.com) mails.
