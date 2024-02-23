@@ -1,12 +1,11 @@
 {
     "name": "beyondcode/helo-laravel",
     "description": "HELO Laravel debug helper",
+    "license": "MIT",
     "keywords": [
         "beyondcode",
         "HELO"
     ],
-    "homepage": "https://github.com/beyondcode/helo-laravel",
-    "license": "MIT",
     "authors": [
         {
             "name": "Marcel Pociot",
@@ -15,17 +14,18 @@
             "role": "Developer"
         }
     ],
+    "homepage": "https://github.com/beyondcode/helo-laravel",
     "require": {
-        "php": "^7.3|^8.0",
-        "illuminate/view": "^6.0|^7.0|^8.0|^9.0|^10.0",
-        "illuminate/console": "^6.0|^7.0|^8.0|^9.0|^10.0",
-        "illuminate/mail": "^6.0|^7.0|^8.0|^9.0|^10.0"
+        "php": "^8.0 || ^8.1 || ^8.2",
+        "illuminate/console": "^9.0 || ^10.0 || ^11.0",
+        "illuminate/mail": "^9.0 || ^10.0 || ^11.0",
+        "illuminate/view": "^9.0 || ^10.0 || ^11.0"
     },
     "require-dev": {
-        "orchestra/testbench": "^5.1|^6.3|^7.0|^8.0",
-        "pestphp/pest": "1.x-dev",
-        "phpunit/phpunit": "^8.0|^9.0"
+        "orchestra/testbench": "^7.0 || ^8.0 || ^9.0",
+        "pestphp/pest": "1.x-dev || 2.x-dev"
     },
+    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
             "BeyondCode\\HeloLaravel\\": "src"
@@ -36,22 +36,24 @@
             "BeyondCode\\HeloLaravel\\Tests\\": "tests"
         }
     },
-    "scripts": {
-        "test": "vendor/bin/phpunit",
-        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
-    },
     "config": {
-        "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true
-        }
+        },
+        "sort-packages": true
     },
-    "minimum-stability": "dev",
     "extra": {
+        "branch-alias": {
+            "dev-master": "11.x-dev"
+        },
         "laravel": {
             "providers": [
                 "BeyondCode\\HeloLaravel\\HeloLaravelServiceProvider"
             ]
         }
+    },
+    "scripts": {
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage-html coverage"
     }
 }
