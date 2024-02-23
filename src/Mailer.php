@@ -16,7 +16,7 @@ class Mailer extends LaravelMailer implements MailerContract
     public function send($view, array $data = [], $callback = null)
     {
         if ($view instanceof Mailable
-            && ! $view instanceof ShouldQueue
+            && !$view instanceof ShouldQueue
         ) {
             $this->applyDebugHeaders($view);
         }
@@ -33,7 +33,7 @@ class Mailer extends LaravelMailer implements MailerContract
 
             $viewFile = $this->getMailableViewFile($mailable);
 
-            if (! is_null($viewFile)) {
+            if (!is_null($viewFile)) {
                 $view = $this->getMailableView($viewFile);
                 $viewContent = $this->getMailableViewContent($view);
                 $viewData = $this->getMailableViewData($mailable);
@@ -62,7 +62,7 @@ class Mailer extends LaravelMailer implements MailerContract
 
     protected function getMailableViewFile(Mailable $mailable)
     {
-        if (! is_null($markdown = $this->getMailableProperty($mailable, 'markdown'))) {
+        if (!is_null($markdown = $this->getMailableProperty($mailable, 'markdown'))) {
             return $markdown;
         }
 
@@ -86,7 +86,7 @@ class Mailer extends LaravelMailer implements MailerContract
         $clonedData = $cloner->cloneVar($mailable->buildViewData());
 
         return $dumper->dump($clonedData, true, [
-            'maxDepth' => 3,
+            'maxDepth'        => 3,
             'maxStringLength' => 160,
         ]);
     }
