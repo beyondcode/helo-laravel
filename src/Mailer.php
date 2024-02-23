@@ -39,7 +39,6 @@ class Mailer extends LaravelMailer implements MailerContract
                 $viewData = $this->getMailableViewData($mailable);
             }
 
-
             /**
              * We need to base64 encode the data, as the SMTP header mime encoding could add unwanted
              * CLRF line breaks.
@@ -63,7 +62,7 @@ class Mailer extends LaravelMailer implements MailerContract
 
     protected function getMailableViewFile(Mailable $mailable)
     {
-        if (!is_null($markdown = $this->getMailableProperty($mailable, 'markdown'))) {
+        if (! is_null($markdown = $this->getMailableProperty($mailable, 'markdown'))) {
             return $markdown;
         }
 

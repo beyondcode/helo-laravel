@@ -6,7 +6,6 @@ use Illuminate\Contracts\Mail\Mailer as MailerContract;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-use Swift_Mailer;
 
 class HeloLaravelServiceProvider extends ServiceProvider
 {
@@ -17,15 +16,14 @@ class HeloLaravelServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if ($this->app->runningUnitTests() || !$this->app['config']['helo.is_enabled']) {
+        if ($this->app->runningUnitTests() || ! $this->app['config']['helo.is_enabled']) {
             return;
         }
-
 
         $this->bootMailable();
 
         if ($this->app->runningInConsole()) {
-            View::addNamespace('helo', __DIR__ . '/../resources/views');
+            View::addNamespace('helo', __DIR__.'/../resources/views');
         }
     }
 

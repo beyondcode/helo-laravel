@@ -15,7 +15,7 @@ class TestMail extends Mailable
 
     public function build()
     {
-        $this->subject("Test from HELO");
+        $this->subject('Test from HELO');
 
         return $this->plainText ? $this->text('helo::email') : $this->markdown('helo::email');
     }
