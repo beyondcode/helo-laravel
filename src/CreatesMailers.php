@@ -16,7 +16,9 @@ trait CreatesMailers
         // on the mailer. This allows us to resolve mailer classes via containers
         // for maximum testability on said classes instead of passing Closures.
         $mailer = new Mailer(
-            $app['view'], $app['swift.mailer'], $app['events']
+            $app['view'],
+            $app['swift.mailer'],
+            $app['events']
         );
 
         if ($app->bound('queue')) {
@@ -45,7 +47,10 @@ trait CreatesMailers
         // on the mailer. This allows us to resolve mailer classes via containers
         // for maximum testability on said classes instead of passing Closures.
         $mailer = new Laravel7Mailer(
-            'smtp', $app['view'], $swiftMailer, $app['events']
+            'smtp',
+            $app['view'],
+            $swiftMailer,
+            $app['events']
         );
 
         if ($app->bound('queue')) {
@@ -78,7 +83,10 @@ trait CreatesMailers
         // on the mailer. This allows us to resolve mailer classes via containers
         // for maximum testability on said classes instead of passing Closures.
         $mailer = new Laravel7Mailer(
-            'smtp', $app['view'], $symfonyTransport, $app['events']
+            'smtp',
+            $app['view'],
+            $symfonyTransport,
+            $app['events']
         );
 
         if ($app->bound('queue')) {
@@ -105,9 +113,10 @@ trait CreatesMailers
     /**
      * Set a global address on the mailer by type.
      *
-     * @param  \Illuminate\Mail\Mailer  $mailer
-     * @param  array  $config
-     * @param  string  $type
+     * @param \Illuminate\Mail\Mailer $mailer
+     * @param array                   $config
+     * @param string                  $type
+     *
      * @return void
      */
     protected function setGlobalAddress($mailer, array $config, $type)

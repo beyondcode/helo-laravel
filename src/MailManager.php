@@ -11,7 +11,7 @@ class MailManager extends LaravelMailManager implements FactoryContract
 
     public function mailer($name = null)
     {
-        if (! $name) {
+        if (!$name) {
             return $this->createLaravel9Mailer($this->app);
         }
 
