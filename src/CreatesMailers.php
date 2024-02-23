@@ -105,9 +105,9 @@ trait CreatesMailers
     /**
      * Set a global address on the mailer by type.
      *
-     * @param \Illuminate\Mail\Mailer $mailer
-     * @param array $config
-     * @param string $type
+     * @param  \Illuminate\Mail\Mailer  $mailer
+     * @param  array  $config
+     * @param  string  $type
      * @return void
      */
     protected function setGlobalAddress($mailer, array $config, $type)
@@ -119,7 +119,7 @@ trait CreatesMailers
         }
 
         if (is_array($address) && isset($address['address'])) {
-            $mailer->{'always' . Str::studly($type)}($address['address'], $address['name']);
+            $mailer->{'always'.Str::studly($type)}($address['address'], $address['name']);
         }
     }
 }

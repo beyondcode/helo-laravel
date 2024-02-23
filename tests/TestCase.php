@@ -10,7 +10,7 @@ class TestCase extends BaseTestCase
     protected function getPackageProviders($app)
     {
         return [
-            HeloLaravelServiceProvider::class
+            HeloLaravelServiceProvider::class,
         ];
     }
 }
