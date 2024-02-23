@@ -18,8 +18,7 @@ test('the mail commands sends the mailable', function () {
     Mail::assertSent(TestMail::class);
 });
 
-test('plain text mails work correctly', function ()
-{
+test('plain text mails work correctly', function () {
     Mail::fake();
 
     Mail::to('test@usehelo.com')->send(new TestMail(true));
