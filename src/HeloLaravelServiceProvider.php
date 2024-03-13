@@ -50,8 +50,13 @@ class HeloLaravelServiceProvider extends ServiceProvider
             if ($version < 7) {
                 return $this->createLaravel6Mailer($app);
             }
-            if ($version < 9) {
+
+            if ($version < 8) {
                 return $this->createLaravel7Mailer($app);
+            }
+
+            if ($version < 9) {
+                return $this->createLaravel8Mailer($app);
             }
 
             return $this->createLaravel9Mailer($app);

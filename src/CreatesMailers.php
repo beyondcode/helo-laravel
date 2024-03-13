@@ -67,6 +67,38 @@ trait CreatesMailers
         return $mailer;
     }
 
+    protected function createLaravel8Mailer($app)
+    {
+        $defaultDriver = $app['mail.manager']->getDefaultDriver();
+        $config = $this->getConfig($defaultDriver);
+
+        $swiftMailer = new Swift_Mailer($app['mail.manager']->createTransport($config));
+
+
+        // Once we have create the mailer instance, we will set a container instance
+        // on the mailer. This allows us to resolve mailer classes via containers
+        // for maximum testability on said classes instead of passing Closures.
+        $mailer = new Laravel8Mailer(
+            'smtp',
+            $app['view'],
+            $swiftMailer,
+            $app['events']
+        );
+
+        if ($app->bound('queue')) {
+            $mailer->setQueue($app['queue']);
+        }
+
+        // Next we will set all of the global addresses on this mailer, which allows
+        // for easy unification of all "from" addresses as well as easy debugging
+        // of sent messages since they get be sent into a single email address.
+        foreach (['from', 'reply_to', 'to', 'return_path'] as $type) {
+            $this->setGlobalAddress($mailer, $config, $type);
+        }
+
+        return $mailer;
+    }
+
     protected function createLaravel9Mailer($app)
     {
         $defaultDriver = $app['mail.manager']->getDefaultDriver();
