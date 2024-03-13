@@ -23,7 +23,7 @@ class HeloLaravelServiceProvider extends ServiceProvider
         $this->bootMailable();
 
         if ($this->app->runningInConsole()) {
-            View::addNamespace('helo', __DIR__.'/../resources/views');
+            View::addNamespace('helo', __DIR__ . '/../resources/views');
         }
     }
 
@@ -38,11 +38,11 @@ class HeloLaravelServiceProvider extends ServiceProvider
             ]);
 
             $this->publishes([
-                __DIR__.'/../config/helo.php' => base_path('config/helo.php'),
+                __DIR__ . '/../config/helo.php' => base_path('config/helo.php'),
             ], 'config');
         }
 
-        $this->mergeConfigFrom(__DIR__.'/../config/helo.php', 'helo');
+        $this->mergeConfigFrom(__DIR__ . '/../config/helo.php', 'helo');
 
         $this->app->singleton(Mailer::class, function ($app) {
             $version = $this->version($app);
@@ -65,15 +65,11 @@ class HeloLaravelServiceProvider extends ServiceProvider
 
     protected function bootMailable()
     {
-        if ($this->version() < 10) {
-            $instance = app()->make(Mailer::class);
+        $instance = app()->make(Mailer::class);
 
-            Mail::swap($instance);
+        Mail::swap($instance);
 
-            $this->app->instance(MailerContract::class, $instance);
-        } else {
-            Mail::swap(new MailManager($this->app));
-        }
+        $this->app->instance(MailerContract::class, $instance);
     }
 
     private function version($app = null): int
