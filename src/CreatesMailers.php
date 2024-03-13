@@ -74,7 +74,6 @@ trait CreatesMailers
 
         $swiftMailer = new Swift_Mailer($app['mail.manager']->createTransport($config));
 
-
         // Once we have create the mailer instance, we will set a container instance
         // on the mailer. This allows us to resolve mailer classes via containers
         // for maximum testability on said classes instead of passing Closures.
