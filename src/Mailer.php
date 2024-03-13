@@ -21,7 +21,7 @@ class Mailer extends LaravelMailer implements MailerContract
             $this->applyDebugHeaders($view);
         }
 
-        parent::send($view, $data, $callback);
+        return parent::send($view, $data, $callback);
     }
 
     protected function applyDebugHeaders(Mailable $mailable)
