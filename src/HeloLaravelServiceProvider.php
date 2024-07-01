@@ -65,11 +65,11 @@ class HeloLaravelServiceProvider extends ServiceProvider
 
     protected function bootMailable()
     {
-        $instance = app()->make(Mailer::class);
+        $instance = app()->make(MailManager::class, ['app' => app()]);
+        $mailerInstance = app()->make(Mailer::class);
 
         Mail::swap($instance);
-
-        $this->app->instance(MailerContract::class, $instance);
+        $this->app->instance(MailerContract::class, $mailerInstance);
     }
 
     private function version($app = null): int
