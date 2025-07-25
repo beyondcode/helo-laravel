@@ -8,7 +8,6 @@ use Swift_Mailer;
 
 trait CreatesMailers
 {
-
     protected function createLaravel8Mailer($app)
     {
         $defaultDriver = $app['mail.manager']->getDefaultDriver();
