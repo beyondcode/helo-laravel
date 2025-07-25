@@ -47,14 +47,6 @@ class HeloLaravelServiceProvider extends ServiceProvider
         $this->app->singleton(Mailer::class, function ($app) {
             $version = $this->version($app);
 
-            if ($version < 7) {
-                return $this->createLaravel6Mailer($app);
-            }
-
-            if ($version < 8) {
-                return $this->createLaravel7Mailer($app);
-            }
-
             if ($version < 9) {
                 return $this->createLaravel8Mailer($app);
             }
