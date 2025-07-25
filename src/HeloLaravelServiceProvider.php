@@ -45,13 +45,7 @@ class HeloLaravelServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/helo.php', 'helo');
 
         $this->app->singleton(Mailer::class, function ($app) {
-            $version = $this->version($app);
-
-            if ($version < 9) {
-                return $this->createLaravel8Mailer($app);
-            }
-
-            return $this->createLaravel9Mailer($app);
+            return $this->createGeneralLaravelMailer($app);
         });
     }
 
