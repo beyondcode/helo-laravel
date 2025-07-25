@@ -1,37 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd"
-         bootstrap="vendor/autoload.php"
-         cacheDirectory=".phpunit.cache"
-         executionOrder="depends,defects"
-         beStrictAboutCoverageMetadata="true"
-         beStrictAboutOutputDuringTests="true"
-         colors="true"
-         backupGlobals="false"
-         backupStaticProperties="false"
-         stopOnError="false"
-         stopOnFailure="false">
-    <testsuites>
-        <testsuite name="BeyondCode Test Suite">
-            <directory>tests</directory>
-        </testsuite>
-    </testsuites>
-
-    <source restrictDeprecations="true" restrictNotices="true" restrictWarnings="true">
-        <include>
-            <directory>src</directory>
-        </include>
-    </source>
-
-    <logging>
-        <junit outputFile="build/report.junit.xml"/>
-    </logging>
-
-    <coverage>
-        <report>
-            <html outputDirectory="build/html-coverage" />
-            <text outputFile="build/coverage.txt" />
-            <clover outputFile="build/clover.xml" />
-        </report>
-    </coverage>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.5/phpunit.xsd" bootstrap="vendor/autoload.php" cacheDirectory=".phpunit.cache" executionOrder="depends,defects" beStrictAboutCoverageMetadata="true" beStrictAboutOutputDuringTests="true" colors="true" backupGlobals="false" backupStaticProperties="false" stopOnError="false" stopOnFailure="false">
+  <testsuites>
+    <testsuite name="BeyondCode Test Suite">
+      <directory>tests</directory>
+    </testsuite>
+  </testsuites>
+  <source restrictNotices="true" restrictWarnings="true" ignoreIndirectDeprecations="true">
+    <include>
+      <directory>src</directory>
+    </include>
+  </source>
+  <logging>
+    <junit outputFile="build/report.junit.xml"/>
+  </logging>
+  <coverage>
+    <report>
+      <html outputDirectory="build/html-coverage"/>
+      <text outputFile="build/coverage.txt"/>
+      <clover outputFile="build/clover.xml"/>
+    </report>
+  </coverage>
 </phpunit>

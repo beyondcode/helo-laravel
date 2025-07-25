@@ -16,14 +16,14 @@
     ],
     "homepage": "https://github.com/beyondcode/helo-laravel",
     "require": {
-        "php": "^8.0 || ^8.1 || ^8.2",
-        "illuminate/console": "^8.0 || ^9.0 || ^10.0 || ^11.0",
-        "illuminate/mail": "^8.0 || ^9.0 || ^10.0 || ^11.0",
-        "illuminate/view": "^8.0 || ^9.0 || ^10.0 || ^11.0"
+        "php": "^8.2",
+        "illuminate/console": "^10.0 || ^11.0 || ^12.0",
+        "illuminate/mail": "^10.0 || ^11.0 || ^12.0",
+        "illuminate/view": "^10.0 || ^11.0 || ^12.0"
     },
     "require-dev": {
-        "orchestra/testbench": "^7.0 || ^8.0 || ^9.0",
-        "pestphp/pest": "1.x-dev || 2.x-dev"
+        "orchestra/testbench": "^8.0 || ^9.0 || ^10.0 || ^11.0 || ^12.0",
+        "pestphp/pest": "1.x-dev || 2.x-dev || ^3.7"
     },
     "minimum-stability": "dev",
     "autoload": {
