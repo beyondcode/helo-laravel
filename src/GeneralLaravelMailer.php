@@ -5,8 +5,19 @@ namespace BeyondCode\HeloLaravel;
 use Illuminate\Contracts\Mail\Factory as MailFactory;
 use Illuminate\Contracts\Mail\Mailer as MailerContract;
 
-class Laravel8Mailer extends Laravel7Mailer implements MailerContract, MailFactory
+class GeneralLaravelMailer extends Mailer implements MailerContract, MailFactory
 {
+    public $currentMailer = null;
+    protected $app;
+    protected $mailers = [];
+
+    public function mailer($name = null)
+    {
+        $this->currentMailer = $name;
+
+        return $this;
+    }
+
     /**
      * Set laravel application.
      *
