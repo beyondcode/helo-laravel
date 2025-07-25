@@ -7,7 +7,6 @@ use Illuminate\Support\Str;
 
 trait CreatesMailers
 {
-
     protected function createGeneralLaravelMailer($app)
     {
         $defaultDriver = $app['mail.manager']->getDefaultDriver();
