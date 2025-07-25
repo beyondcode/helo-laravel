@@ -45,30 +45,16 @@ class HeloLaravelServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/helo.php', 'helo');
 
         $this->app->singleton(Mailer::class, function ($app) {
-            $version = $this->version($app);
-
-            if ($version < 7) {
-                return $this->createLaravel6Mailer($app);
-            }
-
-            if ($version < 8) {
-                return $this->createLaravel7Mailer($app);
-            }
-
-            if ($version < 9) {
-                return $this->createLaravel8Mailer($app);
-            }
-
-            return $this->createLaravel9Mailer($app);
+            return $this->createGeneralLaravelMailer($app);
         });
     }
 
     protected function bootMailable()
     {
+        $managerInstance = app()->make(MailManager::class, ['app' => app()]);
         $instance = app()->make(Mailer::class);
 
-        Mail::swap($instance);
-
+        Mail::swap($managerInstance);
         $this->app->instance(MailerContract::class, $instance);
     }
 
