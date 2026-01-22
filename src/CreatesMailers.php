@@ -13,7 +13,10 @@ trait CreatesMailers
         $config = $this->getConfig($defaultDriver);
 
         // We get Symfony Transport from Laravel 10+ mailer
-        $symfonyTransport = $app['mailer']->getSymfonyTransport();
+        // Fixed: Avoid circular dependency by using mail.manager->driver() instead of 'mailer' binding
+        $symfonyTransport = $app['mail.manager']
+            ->driver($defaultDriver)
+            ->getSymfonyTransport();
 
         // Once we have create the mailer instance, we will set a container instance
         // on the mailer. This allows us to resolve mailer classes via containers

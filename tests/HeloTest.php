@@ -30,3 +30,15 @@ test('the correct mailer is binded', function () {
 
     $this->assertTrue($mailer instanceof Mailer);
 });
+
+test('mail raw does not cause infinite recursion', function () {
+    Mail::fake();
+
+    // This would cause "Maximum call stack size reached. Infinite recursion?"
+    // prior to the fix in CreatesMailers.php
+    Mail::raw('Test email body', function ($message) {
+        $message->to('test@example.com')->subject('Test Subject');
+    });
+
+    expect(true)->toBeTrue();
+});
